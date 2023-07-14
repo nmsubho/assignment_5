@@ -1,3 +1,4 @@
+import NavBar from "./components/ui/NavBar";
 import {
   decrement,
   increment,
@@ -11,6 +12,7 @@ function App() {
 
   return (
     <div>
+      <NavBar />
       <div className="flex justify-center items-center mt-5">
         <button
           className="border-2 p-2 border-red-500 text-red-500"
