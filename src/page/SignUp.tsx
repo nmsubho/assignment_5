@@ -1,26 +1,37 @@
 import { Link } from "react-router-dom";
+import { useAppDispatch } from "../redux/hooks";
+import { createUser } from "../redux/features/user/userSlice";
 
 const SignUp = () => {
+  const dispatch = useAppDispatch();
+
+  const onSubmit = (event: any) => {
+    event.preventDefault();
+    const { email, password } = event.target;
+    dispatch(createUser({ email: email.value, password: password.value }));
+  };
   return (
     <div className="px-10 py-5 xs:p-0 mx-auto md:w-full md:max-w-md">
       <div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
-        <div className="px-5 py-7">
+        <form className="px-5 py-7" onSubmit={onSubmit}>
           <label className="font-semibold text-sm text-gray-600 pb-1 block">
             E-mail
           </label>
           <input
-            type="text"
+            name="email"
+            type="email"
             className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
           />
           <label className="font-semibold text-sm text-gray-600 pb-1 block">
             Password
           </label>
           <input
-            type="text"
+            name="password"
+            type="password"
             className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
           />
           <button
-            type="button"
+            type="submit"
             className="transition duration-200 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"
           >
             <span className="inline-block mr-2">Sign Up</span>
@@ -39,7 +50,7 @@ const SignUp = () => {
               />
             </svg>
           </button>
-        </div>
+        </form>
         <div className="py-5 font-normal text-sm text-center">
           Already have an account?{" "}
           <span>
