@@ -1,15 +1,26 @@
-import { Link } from "react-router-dom";
-import { useAppDispatch } from "../redux/hooks";
-import { createUser } from "../redux/features/user/userSlice";
+import { Link, useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { loginUser } from "../redux/features/user/userSlice";
+import { useEffect } from "react";
 
 const SignIn = () => {
+  const { user, isLoading } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
+
+  const navigate = useNavigate();
 
   const onSubmit = (event: any) => {
     event.preventDefault();
     const { email, password } = event.target;
-    dispatch(createUser({ email: email.value, password: password.value }));
+    dispatch(loginUser({ email: email.value, password: password.value }));
   };
+
+  useEffect(() => {
+    if (user.email && !isLoading) {
+      navigate("/");
+    }
+  }, [user.email, isLoading]);
+
   return (
     <div className="px-10 py-5 xs:p-0 mx-auto md:w-full md:max-w-md">
       <div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
