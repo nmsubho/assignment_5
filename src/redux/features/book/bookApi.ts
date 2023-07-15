@@ -8,7 +8,6 @@ const bookApi = api.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["reviews"],
     }),
     getBooks: builder.query({
       query: () => "/books",
@@ -32,6 +31,7 @@ const bookApi = api.injectEndpoints({
 });
 
 export const {
+  useAddBookMutation,
   useGetCommentQuery,
   useGetBooksQuery,
   usePostCommentMutation,

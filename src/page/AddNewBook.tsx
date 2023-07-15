@@ -1,7 +1,34 @@
+import { useAddBookMutation } from "../redux/features/book/bookApi";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+
 const AddNewBook = () => {
+  // const dispatch = useAppDispatch();
+
+  // const onSubmit = (event: any) => {
+  //   event.preventDefault();
+  //   const { email, password } = event.target;
+  //   dispatch(({ email: email.value, password: password.value }));
+  // };
+
+  const { user } = useAppSelector((state) => state.user);
+
+  const [addBook, { isLoading, isError, isSuccess }] = useAddBookMutation();
+
+  const onSubmit = (event: any) => {
+    event.preventDefault();
+    const { title, author, genre, publicationDate } = event.target;
+    addBook({
+      title: title.value,
+      author: author.value,
+      genre: genre.value,
+      publicationDate: publicationDate.value,
+      addedBy: user.uid,
+    });
+  };
+
   return (
     <div>
-      <form>
+      <form onSubmit={onSubmit}>
         <div className="flex items-center justify-center h-screen bg-gray-100">
           <div className="bg-white py-6 rounded-md px-10 max-w-lg shadow-md">
             <h1 className="text-center text-lg font-bold text-gray-500">
