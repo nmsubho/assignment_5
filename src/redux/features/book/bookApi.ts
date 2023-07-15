@@ -8,7 +8,7 @@ const bookApi = api.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["comments"],
+      invalidatesTags: ["reviews"],
     }),
     getBooks: builder.query({
       query: () => "/books",
@@ -22,11 +22,11 @@ const bookApi = api.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["comments"],
+      invalidatesTags: ["reviews"],
     }),
     getComment: builder.query({
       query: (id) => `/comment/${id}`,
-      providesTags: ["comments"],
+      providesTags: ["reviews"],
     }),
   }),
 });
