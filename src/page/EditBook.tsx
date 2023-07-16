@@ -39,7 +39,7 @@ const EditBook = () => {
       <div className="flex items-center justify-center h-screen bg-gray-100">
         <div className="bg-white py-6 rounded-md px-10 max-w-lg shadow-md">
           <h1 className="text-center text-lg font-bold text-gray-500">
-            Add Book
+            Update Book
           </h1>
           <div className="space-y-4 mt-6">
             <div className="w-full">

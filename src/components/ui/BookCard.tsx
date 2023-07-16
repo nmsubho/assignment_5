@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link } from "react-router-dom";
 
-const BookCard = ({ book }) => {
+const BookCard = ({ book }: { book: any }) => {
   return (
     <Link to={`/books/${book._id}`}>
       <div className="lg:flex">

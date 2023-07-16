@@ -11,7 +11,12 @@ const bookApi = api.injectEndpoints({
       invalidatesTags: ["books"],
     }),
     getBooks: builder.query({
-      query: () => "/books",
+      query: ({ searchTerm = "", publicationYear, genre }) =>
+        `/books?${searchTerm ? `&searchTerm=${searchTerm}` : ""}${
+          publicationYear ? `&publicationYear=${publicationYear}` : ""
+        }${genre ? `&genre=${genre}` : ""}`,
+      // query: ({ searchTerm = "", ...others }) => others.map(([field, value])=>)
+      // `/books?searchTerm=${searchTerm}&publicationYear=${publicationYear}`,
       providesTags: ["books"],
     }),
     singleBook: builder.query({
@@ -48,6 +53,14 @@ const bookApi = api.injectEndpoints({
       query: (id) => `/review/${id}`,
       providesTags: ["reviews"],
     }),
+    getGenres: builder.query({
+      query: () => "/genres",
+      providesTags: ["books", "book"],
+    }),
+    getPublicationYears: builder.query({
+      query: () => "/publication-years",
+      providesTags: ["books", "book"],
+    }),
   }),
 });
 
@@ -59,4 +72,6 @@ export const {
   useDeleteBookMutation,
   useGetReviewQuery,
   usePostReviewMutation,
+  useGetGenresQuery,
+  useGetPublicationYearsQuery,
 } = bookApi;

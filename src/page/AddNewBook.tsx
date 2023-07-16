@@ -72,7 +72,10 @@ const AddNewBook = () => {
                 />
               </div>
             </div>
-            <button className="w-full mt-5 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight">
+            <button
+              className="w-full mt-5 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight"
+              type="submit"
+            >
               Add
             </button>
           </div>
