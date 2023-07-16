@@ -24,7 +24,7 @@ const BookDetails = () => {
           <button>Add to Wishlist</button>
         </div>
       </div>
-      <BookReview id={id!} />
+      <BookReview id={id!} addedBy={book?.addedBy} />
     </>
   );
 };
