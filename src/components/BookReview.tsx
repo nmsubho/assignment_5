@@ -5,7 +5,7 @@ import {
   usePostReviewMutation,
 } from "../redux/features/book/bookApi";
 import { useAppSelector } from "../redux/hooks";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 interface IProps {
   id: string;
@@ -68,9 +68,12 @@ const BookReview = ({ id, addedBy }: IProps) => {
             </button>
           </form>
           <div>
-            <button className=" bg-orange-400 text-gray-200  p-2 mx-2 px-5 rounded  hover:bg-orange-500 hover:text-gray-100 inline-block">
-              Edit
-            </button>
+            <Link to={`/edit-book/${id}`}>
+              <button className=" bg-orange-400 text-gray-200  p-2 mx-2 px-5 rounded  hover:bg-orange-500 hover:text-gray-100 inline-block">
+                Edit
+              </button>
+            </Link>
+
             <button
               className="bg-red-500 text-gray-200  p-2 mx-2 rounded  hover:bg-red-600 hover:text-gray-100 inline-block"
               onClick={handleDelete}
