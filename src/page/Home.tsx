@@ -17,7 +17,7 @@ const Home = () => {
     <div className="container px-6 py-10 mx-auto">
       <h1 className="text-2xl">New Books</h1>
       <div className="grid grid-cols-1 gap-8 mt-8 md:mt-16 md:grid-cols-2">
-        {books.slice(0, 10)?.map((book: any) => (
+        {books?.slice(0, 10)?.map((book: any) => (
           <div className="lg:flex">
             <img
               className="object-cover w-full h-28 rounded-lg lg:w-64"

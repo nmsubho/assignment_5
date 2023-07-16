@@ -87,7 +87,16 @@ const BookReview = ({ id, addedBy }: IProps) => {
       <div className="mt-10">
         {data?.reviews?.map((review: string, index: number) => (
           <div key={index} className="flex gap-3 items-center mb-5">
-            <span>AV</span>
+            <span
+              className={`border-2 ${
+                index % 2 === 0
+                  ? "border-blue-400 bg-blue-400"
+                  : "border-red-300 bg-red-300"
+              } px-1`}
+              style={{ borderRadius: "50%" }}
+            >
+              U
+            </span>
             <p>{review}</p>
           </div>
         ))}

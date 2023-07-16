@@ -6,7 +6,9 @@ const BookDetails = () => {
   const { id } = useParams();
 
   const { data: book, isLoading, error } = useSingleBookQuery(id);
-  return (
+  return isLoading ? (
+    <p>Loading...</p>
+  ) : (
     <>
       <div className="flex max-w-7xl mx-auto items-center border-b border-gray-300 mt-3 pb-2">
         <div className="w-[50%]">
