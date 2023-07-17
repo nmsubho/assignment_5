@@ -1,16 +1,19 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   useSingleBookQuery,
   useUpdateBookMutation,
 } from "../redux/features/book/bookApi";
+import { toast } from "react-hot-toast";
 
 const EditBook = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const { data: book, isLoading, error } = useSingleBookQuery(id);
+  const { data: book, isLoading } = useSingleBookQuery(id);
 
-  const [updateBook] = useUpdateBookMutation();
+  const [updateBook, { isSuccess, isError }] = useUpdateBookMutation();
 
   const onSubmit = async (event: any) => {
     event.preventDefault();
@@ -27,10 +30,19 @@ const EditBook = () => {
     };
 
     const result = await updateBook(options);
-    if (result?.data?.ok) {
+    if ("data" in result && result?.data?.ok) {
       navigate(`/books/${id}`);
     }
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Book updated successfully!");
+    }
+    if (isError) {
+      toast.error("Something went wrong!");
+    }
+  }, [isSuccess, isError]);
 
   return isLoading ? (
     <p>Loading</p>

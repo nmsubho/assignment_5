@@ -1,11 +1,14 @@
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSingleBookQuery } from "../redux/features/book/bookApi";
 import BookReview from "../components/BookReview";
+import { toast } from "react-hot-toast";
 
 const BookDetails = () => {
   const { id } = useParams();
 
-  const { data: book, isLoading, error } = useSingleBookQuery(id);
+  const { data: book, isSuccess, isLoading, isError } = useSingleBookQuery(id);
+
   return isLoading ? (
     <p>Loading...</p>
   ) : (
@@ -23,7 +26,7 @@ const BookDetails = () => {
           <p className="text-xl">Author: {book?.author}</p>
           <p className="text-xl">Genre: {book?.genre}</p>
           <p className="text-xl">Publication Date: {book?.publicationDate}</p>
-          <button>Add to Wishlist</button>
+          <button className=" text-red-700">Add to Wishlist</button>
         </div>
       </div>
       <BookReview id={id!} addedBy={book?.addedBy} />

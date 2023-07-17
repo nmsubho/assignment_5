@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState, useEffect } from "react";
 import {
   useDeleteBookMutation,
   useGetReviewQuery,
@@ -6,6 +6,7 @@ import {
 } from "../redux/features/book/bookApi";
 import { useAppSelector } from "../redux/hooks";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 interface IProps {
   id: string;
@@ -25,10 +26,16 @@ const BookReview = ({ id, addedBy }: IProps) => {
   const { user } = useAppSelector((state) => state.user);
 
   const [postReview] = usePostReviewMutation();
-  const [deleteBook] = useDeleteBookMutation();
+  const [deleteBook, { isSuccess }] = useDeleteBookMutation();
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (!inputValue) {
+      toast.error("Review can not be empty!");
+      return;
+    }
+
     const options = {
       id: id,
       data: { review: inputValue },
@@ -42,11 +49,20 @@ const BookReview = ({ id, addedBy }: IProps) => {
   };
 
   const handleDelete = async () => {
-    const result = await deleteBook(id);
-    if (result?.data?.acknowledged) {
-      navigate("/books");
+    const confirmStatus = confirm("Want to delete?");
+    if (confirmStatus) {
+      const result = await deleteBook(id);
+      if ("data" in result && result?.data?.acknowledged) {
+        navigate("/books");
+      }
     }
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.error("Book deleted successfully!");
+    }
+  }, [isSuccess]);
 
   return (
     <div className="max-w-7xl mx-auto mt-5">

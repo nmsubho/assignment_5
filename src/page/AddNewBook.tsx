@@ -1,15 +1,9 @@
+import { toast } from "react-hot-toast";
 import { useAddBookMutation } from "../redux/features/book/bookApi";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { useEffect } from "react";
 
 const AddNewBook = () => {
-  // const dispatch = useAppDispatch();
-
-  // const onSubmit = (event: any) => {
-  //   event.preventDefault();
-  //   const { email, password } = event.target;
-  //   dispatch(({ email: email.value, password: password.value }));
-  // };
-
   const { user } = useAppSelector((state) => state.user);
 
   const [addBook, { isLoading, isError, isSuccess }] = useAddBookMutation();
@@ -25,6 +19,12 @@ const AddNewBook = () => {
       addedBy: user.uid,
     });
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Book added successfully!");
+    }
+  }, [isSuccess]);
 
   return (
     <div>
