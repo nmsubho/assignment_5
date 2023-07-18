@@ -26,7 +26,11 @@ const routes = createBrowserRouter([
       },
       {
         path: "/my-list",
-        element: <MyList />,
+        element: (
+          <Protected>
+            <MyList />
+          </Protected>
+        ),
       },
       {
         path: "/add-new-book",

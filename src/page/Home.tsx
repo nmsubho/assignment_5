@@ -5,7 +5,7 @@ import { useGetBooksQuery } from "../redux/features/book/bookApi";
 const Home = () => {
   const [books, setBooks] = useState([]);
 
-  const { data, isLoading, error } = useGetBooksQuery({});
+  const { data, isLoading } = useGetBooksQuery({});
 
   useEffect(() => {
     setBooks(data?.data);

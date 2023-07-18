@@ -66,8 +66,8 @@ const BookReview = ({ id, addedBy }: IProps) => {
 
   return (
     <div className="max-w-7xl mx-auto mt-5">
-      {user.uid === addedBy && (
-        <div className="flex justify-between">
+      <div className="flex justify-between">
+        {user.uid && (
           <form className="flex items-center w-[50%]" onSubmit={handleSubmit}>
             <textarea
               className="border w-full p-1"
@@ -83,6 +83,8 @@ const BookReview = ({ id, addedBy }: IProps) => {
               Submit
             </button>
           </form>
+        )}
+        {user.uid === addedBy && (
           <div>
             <Link to={`/edit-book/${id}`}>
               <button className=" bg-orange-400 text-gray-200  p-2 mx-2 px-5 rounded  hover:bg-orange-500 hover:text-gray-100 inline-block">
@@ -97,8 +99,8 @@ const BookReview = ({ id, addedBy }: IProps) => {
               Delete
             </button>
           </div>
-        </div>
-      )}
+        )}
+      </div>
 
       <div className="mt-10">
         {data?.reviews?.map((review: string, index: number) => (

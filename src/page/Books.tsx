@@ -13,7 +13,7 @@ const Books = () => {
   const [publicationYear, setPublicationYear] = useState("");
   const [genre, setGenre] = useState("");
 
-  const { data, isLoading, error } = useGetBooksQuery({
+  const { data, isLoading } = useGetBooksQuery({
     searchTerm,
     publicationYear,
     genre,
