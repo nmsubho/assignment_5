@@ -1,12 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { toast } from "react-hot-toast";
 import { useAddBookMutation } from "../redux/features/book/bookApi";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { useAppSelector } from "../redux/hooks";
 import { useEffect } from "react";
 
 const AddNewBook = () => {
   const { user } = useAppSelector((state) => state.user);
 
-  const [addBook, { isLoading, isError, isSuccess }] = useAddBookMutation();
+  const [addBook, { isSuccess }] = useAddBookMutation();
 
   const onSubmit = (event: any) => {
     event.preventDefault();
