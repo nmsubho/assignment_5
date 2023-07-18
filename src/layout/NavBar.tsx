@@ -58,14 +58,24 @@ const NavBar = () => {
                 </Link>
               </li>
               {user.uid && (
-                <li>
-                  <Link
-                    className="inline-block no-underline hover:text-black font-medium text-lg py-2 px-4 lg:-ml-2"
-                    to="/add-new-book"
-                  >
-                    Add New Book
-                  </Link>
-                </li>
+                <>
+                  <li>
+                    <Link
+                      className="inline-block no-underline hover:text-black font-medium text-lg py-2 px-4 lg:-ml-2"
+                      to="/my-list"
+                    >
+                      My List
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className="inline-block no-underline hover:text-black font-medium text-lg py-2 px-4 lg:-ml-2"
+                      to="/add-new-book"
+                    >
+                      Add New Book
+                    </Link>
+                  </li>
+                </>
               )}
             </ul>
           </nav>
